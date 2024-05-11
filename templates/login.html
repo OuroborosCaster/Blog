@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}登录{% endblock %}
+
+{% block beforehead %}
+
+<script src="/static/js/login.js"></script>
+
+{% endblock %}
+
+{% block content %}
+
+
+<div id="app" class="uk-card uk-card-default uk-width-1-3@s uk-width-1-1@xs uk-align-center ">
+    <div class="uk-card-header">
+        <h3>
+            <i class="devicon-fastapi-plain"></i> &nbsp&nbsp登录
+        </h3>
+    </div>
+    <div class="uk-card-body">
+        <form>
+            <div class="uk-width-1-1 uk-text-center">
+                使用
+                <select class="uk-width-1-2 uk-select" v-model="loginMethod" @change="switchLogin">
+                    <option value="username">用户名</option>
+                    <option value="email">电子邮箱</option>
+                </select>
+                登录
+            </div>
+            <div id="identity" class="uk-margin uk-flex uk-flex-middle uk-inline ">
+                <div id="identity-icon" class="uk-form-icon">
+                    <i class="fa-regular fa-envelope "></i>
+                </div>
+                <input v-model="identity" id="identity-field" type="text" placeholder="电子邮箱" maxlength="50"
+                       class="uk-input" autocomplete="username">
+            </div>
+            <div id="password" class="uk-margin uk-flex uk-flex-middle uk-inline">
+                <div class="uk-form-icon">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <input v-model="password" name="passwd" type="password" placeholder="密码" maxlength="50"
+                       class="uk-input uk-form-blank" autocomplete="no">
+            </div>
+            <div class="uk-margin">
+                <button id="submitButton" type="submit" @click="login" :disabled="isSubmitting"
+                        class="uk-width-1-1 uk-button uk-button-primary ">
+                    <i class="fa-solid fa-right-to-bracket"></i> 登录
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+/*
+ * custom css
+ */
+body{
+        background-color: #111111 !important;
+    }
+
+.uk-alert-no-border {
+        border: none !important;
+        background-color: transparent !important;
+    }
+
+a:hover, a:active {
+    text-decoration: none;
+}
+
+#vm {
+    display: none;
+}
+
+#loading {
+    margin-bottom: 15px;
+}
+
+#error {
+    display: none;
+    margin-bottom: 15px;
+}

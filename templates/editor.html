@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vditor@3.10.4/dist/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/vditor@3.10.4/dist/index.min.js"></script>
+</head>
+<body>
+<br>
+<div id="{{ vditor_id }}"></div>
+<script>
+    if (window.self === window.parent) {
+        alert("不允许的访问");
+        location.href = '/'
+    } else {
+        var vditor_id = '{{ vditor_id }}'
+        var vditor = new Vditor('{{ vditor_id }}', {
+            minHeight: 400,
+            toolbarConfig: {
+                pin: true,
+            },
+            mode: localStorage.getItem(vditor_id + '_mode') || 'sv',
+            cache: {
+                enable: false,
+            },
+            // upload: {
+            //     accept: 'image/*,.mp3, .wav, .rar',
+            //     token: 'test',
+            //     url: '/api/editor/upload',
+            //     max: 10 * 1024 * 1024,
+            //     filename(name) {
+            //         return name.replace(/[^(a-zA-Z0-9\u4e00-\u9fa5\.)]/g, '').replace(/[\?\\/:|<>\*\[\]\(\)\$%\{\}@~]/g, '').replace('/\\s/g', '')
+            //     },
+            //     multiple: false, // 是否允许批量上传
+            //     fieldName: 'file', // 上传字段名称
+            // },
+            after() {
+                parent.customCssEditor();
+                vditor.setValue(localStorage.getItem(vditor_id + '_content') || '')
+
+            },
+            blur(value) {
+                localStorage.setItem(vditor_id + '_content', value)
+                localStorage.setItem(vditor_id + '_mode', vditor.getCurrentMode())
+            },
+            preview: {
+                hljs: {
+                    style: 'dracula'
+                }
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
+
+
+

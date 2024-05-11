@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}编辑博文{% endblock %}
+
+{% block beforehead %}
+
+<script src="/static/js/article-create.js"></script>
+
+{% endblock %}
+
+{% block content %}
+
+<div id="app" class="uk-width-1-1 uk-section uk-padding-remove-top">
+    <div class="uk-width-1-1">
+        <form>
+            <div class=" uk-width-1-1 uk-grid uk-flex uk-flex-middle">
+                <div class="uk-width-1-5@s uk-width-1-1@xs">
+                    <label class="uk-form-label uk-width-1-1 uk-text-bold uk-text-large" for="title">标题：</label>
+                </div>
+                <div class="uk-width-3-5@s uk-width-1-1@xs">
+                    <input id="title" v-model="title" type="text" minlength="4" maxlength="60"
+                           placeholder="必填，4-60个字符" @change="cacheTitle"
+                           class=" uk-input uk-width-1-1" required>
+                </div>
+            </div>
+            <div class="uk-margin-top uk-width-1-1 uk-grid uk-flex uk-flex-middle">
+                <div class="uk-width-1-5@s uk-width-1-1@xs">
+                    <label class="uk-form-label uk-width-1-1 uk-text-bold uk-text-large" for="summary">简介：</label>
+                </div>
+                <div class="uk-width-3-5@s uk-width-1-1@xs">
+                    <textarea id="summary" v-model="summary" type="text" maxlength="150"
+                              placeholder="可留空，不超过150字符" class=" uk-textarea uk-width-1-1"
+                              style="resize: none" wrap="soft" @change="cacheSummary"></textarea>
+                </div>
+            </div>
+            <div class="uk-margin-top uk-width-1-1 ">
+                <label class="uk-form-label uk-width-1-1 uk-text-bold uk-text-large">正文：</label>
+                <iframe id="editor" class="uk-width-1-1 uk-margin-top darkmode-ignore" height="400px" src="/editor"
+                        seamless></iframe>
+            </div>
+            <div class="uk-margin-top uk-width-1-1 uk-flex uk-flex-between">
+                <button type="submit" @click="save" class="uk-button uk-button-primary">
+                    <i class="fa-solid fa-floppy-disk"></i> 保存
+                </button>
+                <button type="submit" @click="publish" :disabled="isSubmitting" class="uk-button uk-button-primary">
+                    <i class="fa-solid fa-paper-plane"></i> 发布
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+
+
+{% endblock %}

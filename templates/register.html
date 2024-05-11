@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}注册{% endblock %}
+
+{% block beforehead %}
+<script src="/static/js/register.js"></script>
+<style>
+    .uk-alert-no-border {
+        border: none !important;
+        background-color: transparent !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="uk-width-1-1 uk-margin-left uk-height-1-1" id="app">
+    <h1><b>欢迎注册！</b></h1>
+    <form class="uk-form-horizontal uk-width-1-1 ">
+        <!--用户名-->
+        <div class=" uk-width-1-1 uk-grid uk-flex uk-flex-middle">
+            <div class="uk-width-1-6@s uk-width-1-1@xs">
+                <label class="uk-form-label uk-width-1-1 uk-text-bold uk-text-large" for="username">用户名：*</label>
+            </div>
+            <div class="uk-width-2-5@s uk-width-1-1@xs">
+                <input id="username" v-model="username" type="text" maxlength="16" placeholder="不可重复，注册后不可更改"
+                       class=" uk-input uk-width-1-1" autocomplete="username"
+                       @change="checkUsername" @keydown="preventSpace" required>
+            </div>
+            <div class="uk-width-1-3@s uk-width-1-1@xs uk-alert uk-alert-no-border uk-margin-left" id="alert-username">
+                &nbsp
+            </div>
+        </div>
+        <!--昵称-->
+        <div class=" uk-width-1-1 uk-grid uk-flex uk-flex-middle">
+            <div class="uk-width-1-6@s uk-width-1-1@xs">
+                <label class="uk-form-label uk-width-1-1 uk-text-bold uk-text-large" for="nickname">昵称：</label>
+            </div>
+            <div class="uk-width-2-5@s uk-width-1-1@xs">
+                <input id="nickname" v-model="nickname" type="text" maxlength="16"
+                       placeholder="不可重复，注册后可更改，留空则使用随机昵称"
+                       class=" uk-input uk-width-1-1" @change="checkNickname" @keydown="preventSpace">
+            </div>
+            <div class="uk-width-1-3@s uk-width-1-1@xs uk-alert uk-alert-no-border uk-margin-left" id="alert-nickname">
+                &nbsp
+            </div>
+        </div>
+        <!--电子邮箱-->
+        <div class=" uk-width-1-1 uk-grid uk-flex uk-flex-middle">
+            <div class="uk-width-1-6@s uk-width-1-1@xs">
+                <label class="uk-form-label uk-width-1-1 uk-text-bold uk-text-large" for="email">电子邮箱：*</label>
+            </div>
+            <div class="uk-width-2-5@s uk-width-1-1@xs">
+                <input id="email" v-model="email" type="email" maxlength="50" placeholder="your-name@example.com"
+                       class=" uk-input uk-width-1-1" autocomplete="email"
+                       @change="checkEmail" @keydown="preventSpace" required>
+            </div>
+            <div class="uk-width-1-3@s uk-width-1-1@xs uk-alert uk-alert-no-border uk-margin-left" id="alert-email">
+                &nbsp
+            </div>
+        </div>
+        <!--密码-->
+        <div class=" uk-width-1-1 uk-grid uk-flex uk-flex-middle">
+            <div class="uk-width-1-6@s uk-width-1-1@xs">
+                <label class="uk-form-label uk-width-1-1 uk-text-bold uk-text-large" for="password">输入密码：*</label>
+            </div>
+            <div class="uk-width-2-5@s uk-width-1-1@xs">
+                <input id="password" v-model="password" type="password" minlength="8" maxlength="32"
+                       autocomplete="new-password"
+                       placeholder="可使用字母、数字或标点，至少8位" class=" uk-input uk-width-1-1" pattern="[\x21-\x7E]*"
+                       @click="[checkPassword,checkRePassword]" @keydown="preventSpace"
+                       @change="[checkPassword,checkRePassword]"
+                       required>
+            </div>
+            <div class="uk-width-1-3@s uk-width-1-1@xs uk-alert uk-alert-no-border uk-margin-left" id="alert-password">
+                &nbsp
+            </div>
+        </div>
+        <!--重复密码-->
+        <div class=" uk-width-1-1 uk-grid uk-flex uk-flex-middle">
+            <div class="uk-width-1-6@s uk-width-1-1@xs">
+                <label class="uk-form-label uk-width-1-1 uk-text-bold uk-text-large" for="rePassword">重复密码：*</label>
+            </div>
+            <div class="uk-width-2-5@s uk-width-1-1@xs">
+                <input id="rePassword" v-model="rePassword" type="password" minlength="8" maxlength="32"
+                       autocomplete="new-password"
+                       placeholder="请重复输入相同的密码" class=" uk-input uk-width-1-1" pattern="[\x21-\x7E]*"
+                       @click="[checkPassword,checkRePassword]" @keydown="preventSpace"
+                       @change="[checkPassword,checkRePassword]"
+                       required>
+            </div>
+            <div class="uk-width-1-3@s uk-width-1-1@xs uk-alert uk-alert-no-border uk-margin-left"
+                 id="alert-rePassword">
+                &nbsp
+            </div>
+        </div>
+        <div class="uk-margin-top uk-text-center@s uk-text-right uk-margin-right">
+            <button id="" type="submit" @click="register" :disabled="isSubmitting" class="uk-button uk-button-primary">
+                <i class="fa-solid fa-user"></i> 注册
+            </button>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

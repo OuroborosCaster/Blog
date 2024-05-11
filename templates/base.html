@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html class="uk-height-1-1 ">
+<link rel="shortcut icon" href="/static/images/icons/favicon.svg" type="image/x-icon" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% block meta %}<!-- block meta  --> {% endblock %}
+    <title>{% block title %} ? {% endblock %} - 个人网站</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/fontawesome.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.20.8/dist/css/uikit.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.16.0/devicon.min.css"/>
+
+    <link rel="stylesheet" href="/static/css/base.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.23/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.20.8/dist/js/uikit.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.20.8/dist/js/components/notification.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.js"></script>
+
+
+
+    {% block beforehead %}<!-- before head  --> {% endblock %}
+</head>
+<body class="uk-width-1-1">
+<div class="uk-width-1-1">
+    <div class="uk-width-1-1" id="base">
+        <nav class="uk-navbar-container uk-width-1-1 uk-container" uk-navbar="mode: click" id="navbar">
+            <div class="uk-navbar-left">
+                <ul class="uk-navbar-nav">
+                    <li><a target="_blank" href="/"><i class="fa-solid fa-house"></i> 首页</a></li>
+                    <li><a target="_blank" href="/blogs"><i class="fa-solid fa-newspaper"></i> 博客</a></li>
+                    <li><a target="_blank" href="/about"><i class="fa-solid fa-code"></i> 关于</a></li>
+                </ul>
+            </div>
+            <div class=" uk-navbar-right">
+                <ul class="uk-navbar-nav" v-if="isLoggedIn">
+                    <li>
+                        <a><i class="fa-solid fa-user"></i><label id="label-nickname" ref="labelNickname"></label></a>
+                    </li>
+                    <div class="uk-navbar-dropdown">
+                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li @click="logout"><a><i class="fa-solid fa-right-from-bracket"></i> 登出</a></li>
+                        </ul>
+                    </div>
+                    <li>
+                        <a href="/article/create"><i class="fa-solid fa-file-pen"></i> 写作</a>
+                    </li>
+                </ul>
+                <ul class="uk-navbar-nav" v-else>
+                    <li><a href="/login"><i class="fa-solid fa-right-to-bracket"></i> 登录</a></li>
+                    <li><a href="/register"><i class="fa-solid fa-pencil"></i> 注册</a></li>
+                </ul>
+                <ul class="uk-navbar-nav">
+                    <li id="themeButton" @click="switchTheme()"><a><i id="themeIcon" class="fa-solid "></i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div id="content" class="uk-width-1-1" style="border-top:1px solid #aaa; flex: 1 0 auto;align-items: stretch">
+        <div class="uk-container uk-grid-collapse uk-margin-top uk-width-1-1 uk-width-expand uk-height-1-1">
+            <!-- content -->
+            {% block content %}
+            {% endblock %}
+            <!-- // content -->
+        </div>
+    </div>
+
+    <div id="footer" class="uk-margin-top "
+         style="background-color:#eee; border-top:1px solid #aaa; flex-shrink: 0;">
+        <div class="uk-container  uk-text-center uk-margin-bottom">
+            <div class="uk-panel uk-margin-top uk-margin-bottom">
+                <div class="uk-flex uk-flex-center uk-grid uk-child-width-auto" uk-grid>
+                    <a target="_blank"><i class="fa-brands fa-telegram"></i></a>
+                    <a target="_blank"><i class="fa-brands fa-github"></i></a>
+                    <a target="_blank"><i class="fa-brands fa-discord"></i></a>
+                    <a target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+                <p>Powered by <a>FastAPI</a>. Copyright © 2024.
+                </p>
+                <i class="devicon-fastapi-plain" style="font-size: 64px"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/js/base.js"></script>
+
+</body>
+
+</html>
